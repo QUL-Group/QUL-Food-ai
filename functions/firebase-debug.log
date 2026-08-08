@@ -1,0 +1,122 @@
+[debug] [2026-08-06T06:52:25.181Z] ----------------------------------------------------------------------
+[debug] [2026-08-06T06:52:25.183Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\hk626\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy --only functions
+[debug] [2026-08-06T06:52:25.183Z] CLI Version:   15.14.0
+[debug] [2026-08-06T06:52:25.183Z] Platform:      win32
+[debug] [2026-08-06T06:52:25.183Z] Node Version:  v24.14.1
+[debug] [2026-08-06T06:52:25.183Z] Time:          Thu Aug 06 2026 15:52:25 GMT+0900 (日本標準時)
+[debug] [2026-08-06T06:52:25.183Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2026-08-06T06:52:26.122Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2026-08-06T06:52:26.122Z] > authorizing via signed-in user (quantum.link.study.kamo@gmail.com)
+[debug] [2026-08-06T06:52:26.122Z] [iam] checking project qul-food-ai for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]
+[debug] [2026-08-06T06:52:26.123Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:26.123Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:26.123Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai:testIamPermissions [none]
+[debug] [2026-08-06T06:52:26.124Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai:testIamPermissions  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:26.124Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-08-06T06:52:26.975Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai:testIamPermissions 200
+[debug] [2026-08-06T06:52:26.975Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai:testIamPermissions {"permissions":["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","firebase.projects.get"]}
+[debug] [2026-08-06T06:52:26.975Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:26.976Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:26.976Z] >>> [apiv2][query] POST https://iam.googleapis.com/v1/projects/qul-food-ai/serviceAccounts/qul-food-ai@appspot.gserviceaccount.com:testIamPermissions [none]
+[debug] [2026-08-06T06:52:26.976Z] >>> [apiv2][body] POST https://iam.googleapis.com/v1/projects/qul-food-ai/serviceAccounts/qul-food-ai@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[debug] [2026-08-06T06:52:27.880Z] <<< [apiv2][status] POST https://iam.googleapis.com/v1/projects/qul-food-ai/serviceAccounts/qul-food-ai@appspot.gserviceaccount.com:testIamPermissions 200
+[debug] [2026-08-06T06:52:27.880Z] <<< [apiv2][body] POST https://iam.googleapis.com/v1/projects/qul-food-ai/serviceAccounts/qul-food-ai@appspot.gserviceaccount.com:testIamPermissions {"permissions":["iam.serviceAccounts.actAs"]}
+[info] 
+[info] === Deploying to 'qul-food-ai'...
+[info] 
+[info] i  deploying functions 
+[debug] [2026-08-06T06:52:27.889Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:27.889Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:27.889Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudresourcemanager.googleapis.com [none]
+[debug] [2026-08-06T06:52:27.889Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudresourcemanager.googleapis.com  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:28.977Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudresourcemanager.googleapis.com 200
+[debug] [2026-08-06T06:52:28.977Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudresourcemanager.googleapis.com [omitted]
+[debug] [2026-08-06T06:52:28.986Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:28.986Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:28.986Z] >>> [apiv2][query] GET https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai [none]
+[debug] [2026-08-06T06:52:29.176Z] <<< [apiv2][status] GET https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai 200
+[debug] [2026-08-06T06:52:29.176Z] <<< [apiv2][body] GET https://cloudresourcemanager.googleapis.com/v1/projects/qul-food-ai {"projectNumber":"664053366877","projectId":"qul-food-ai","lifecycleState":"ACTIVE","name":"QUL Food AI","labels":{"firebase":"enabled","firebase-core":"disabled"},"createTime":"2026-07-31T01:20:05.530Z"}
+[info] i  functions: preparing codebase default for deployment 
+[info] i  functions: ensuring required API cloudfunctions.googleapis.com is enabled... 
+[info] i  functions: ensuring required API cloudbuild.googleapis.com is enabled... 
+[debug] [2026-08-06T06:52:29.180Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:29.180Z] Checked if tokens are valid: true, expires at: 1786002392869
+[info] i  artifactregistry: ensuring required API artifactregistry.googleapis.com is enabled... 
+[debug] [2026-08-06T06:52:29.181Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:29.181Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:29.181Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com [none]
+[debug] [2026-08-06T06:52:29.181Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:29.182Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com [none]
+[debug] [2026-08-06T06:52:29.182Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:29.429Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com 200
+[debug] [2026-08-06T06:52:29.429Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com [omitted]
+[warn] !  functions: missing required API cloudbuild.googleapis.com. Enabling now... 
+[debug] [2026-08-06T06:52:29.430Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:29.431Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:29.431Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com:enable [none]
+[debug] [2026-08-06T06:52:29.431Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com:enable  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:30.252Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com 200
+[debug] [2026-08-06T06:52:30.252Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com [omitted]
+[warn] !  artifactregistry: missing required API artifactregistry.googleapis.com. Enabling now... 
+[debug] [2026-08-06T06:52:30.255Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:30.256Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:30.256Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com:enable [none]
+[debug] [2026-08-06T06:52:30.256Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com:enable  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:30.414Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com:enable 200
+[debug] [2026-08-06T06:52:30.415Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/cloudbuild.googleapis.com:enable [omitted]
+[debug] [2026-08-06T06:52:30.811Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com:enable 200
+[debug] [2026-08-06T06:52:30.811Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/artifactregistry.googleapis.com:enable [omitted]
+[debug] [2026-08-06T06:52:40.826Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:40.826Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:40.827Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/qul-food-ai/adminSdkConfig [none]
+[debug] [2026-08-06T06:52:41.582Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/qul-food-ai/adminSdkConfig 200
+[debug] [2026-08-06T06:52:41.583Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/qul-food-ai/adminSdkConfig {"projectId":"qul-food-ai","storageBucket":"qul-food-ai.firebasestorage.app"}
+[debug] [2026-08-06T06:52:41.616Z] Validating nodejs source
+[debug] [2026-08-06T06:52:43.883Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "firebase emulators:start --only functions",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "24"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "firebase-admin": "^13.6.0",
+    "firebase-functions": "^7.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "eslint-config-google": "^0.14.0",
+    "firebase-functions-test": "^3.4.1"
+  },
+  "private": true
+}
+[debug] [2026-08-06T06:52:43.883Z] Building nodejs source
+[info] i  functions: Loading and analyzing source code for codebase default to determine what to deploy 
+[debug] [2026-08-06T06:52:43.886Z] Could not find functions.yaml. Must use http discovery
+[debug] [2026-08-06T06:52:43.900Z] Found firebase-functions binary at 'C:\Users\hk626\qul-food-ai\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8249
+
+[debug] [2026-08-06T06:52:44.414Z] Got response from /__/functions.yaml {"endpoints":{"testNotification":{"availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"concurrency":null,"serviceAccountEmail":null,"vpc":null,"platform":"gcfv2","labels":{},"httpsTrigger":{},"entryPoint":"testNotification"}},"specVersion":"v1alpha1","requiredAPIs":[],"extensions":{}}
+[info] i  extensions: ensuring required API firebaseextensions.googleapis.com is enabled... 
+[debug] [2026-08-06T06:52:48.661Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:48.661Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:48.661Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com [none]
+[debug] [2026-08-06T06:52:48.661Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:49.940Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com 200
+[debug] [2026-08-06T06:52:49.941Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com [omitted]
+[warn] !  extensions: missing required API firebaseextensions.googleapis.com. Enabling now... 
+[debug] [2026-08-06T06:52:49.948Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:49.948Z] Checked if tokens are valid: true, expires at: 1786002392869
+[debug] [2026-08-06T06:52:49.948Z] >>> [apiv2][query] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com:enable [none]
+[debug] [2026-08-06T06:52:49.948Z] >>> [apiv2][(partial)header] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com:enable  x-goog-user-project=qul-food-ai
+[debug] [2026-08-06T06:52:51.228Z] <<< [apiv2][status] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com:enable 200
+[debug] [2026-08-06T06:52:51.228Z] <<< [apiv2][body] POST https://serviceusage.googleapis.com/v1/projects/qul-food-ai/services/firebaseextensions.googleapis.com:enable [omitted]
