@@ -124,3 +124,16 @@ export async function saveNotificationToken(
 
 
 }
+
+export async function saveUserSetup(
+  uid: string,
+  data: any
+) {
+  return saveUserSettings(uid, data);
+}
+// ログイン時などにユーザーデータを取得
+export async function getUserData(
+  uid: string
+) {
+  return getUserSettings(uid);
+}
