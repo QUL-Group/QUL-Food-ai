@@ -36,8 +36,10 @@ export default function MenuPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          foods: foods.map((food) => food.name),
-        }),
+  foods: foods.map(
+    food => food.name
+  )
+})
       });
 
       const data = await response.json();
