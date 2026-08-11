@@ -386,7 +386,7 @@ export default function ReceiptPage() {
       );
 
       setMessage(
-        "保存に失敗しました"
+        "保存に失敗しました。食材メニューを確認して保存されているか確認してください。"
       );
     } finally {
       setLoading(false);
