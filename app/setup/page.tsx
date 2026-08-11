@@ -1,10 +1,12 @@
-```tsx
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
-import { saveUserSetup } from "@/lib/userService";
+import {
+  saveUserSetup,
+  getUserSettings,
+} from "@/lib/userService";
 
 export default function SetupPage() {
   const router = useRouter();
@@ -14,12 +16,58 @@ export default function SetupPage() {
   const [familyCount, setFamilyCount] = useState("");
   const [store, setStore] = useState("");
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadSettings = async () => {
+      const user = auth.currentUser;
+
+      if (!user) {
+        router.push("/login");
+        return;
+      }
+
+      try {
+        const data = await getUserSettings(user.uid);
+
+        if (data) {
+          setNickname(data.nickname || "");
+
+          setFridgeSize(
+            data.fridgeSize
+              ? String(data.fridgeSize)
+              : ""
+          );
+
+          setFamilyCount(
+            data.familyCount
+              ? String(data.familyCount)
+              : ""
+          );
+
+          setStore(
+            data.favoriteStore || ""
+          );
+        }
+      } catch (error) {
+        console.error(
+          "Settings load error:",
+          error
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadSettings();
+  }, [router]);
 
   const save = async () => {
     const user = auth.currentUser;
 
     if (!user) {
       alert("ログインしてください");
+      router.push("/login");
       return;
     }
 
@@ -28,12 +76,18 @@ export default function SetupPage() {
       return;
     }
 
-    if (!fridgeSize || Number(fridgeSize) <= 0) {
+    if (
+      !fridgeSize ||
+      Number(fridgeSize) <= 0
+    ) {
       alert("冷蔵庫容量を入力してください");
       return;
     }
 
-    if (!familyCount || Number(familyCount) <= 0) {
+    if (
+      !familyCount ||
+      Number(familyCount) <= 0
+    ) {
       alert("家族人数を入力してください");
       return;
     }
@@ -46,22 +100,42 @@ export default function SetupPage() {
         fridgeSize: Number(fridgeSize),
         familyCount: Number(familyCount),
         favoriteStore: store.trim(),
+
         notification: true,
         aiEnabled: true,
       });
 
+      alert("初期設定を保存しました");
+
       router.push("/dashboard");
     } catch (error) {
-      console.error("Setup save error:", error);
-      alert("設定の保存に失敗しました");
+      console.error(
+        "Setup save error:",
+        error
+      );
+
+      alert(
+        "設定の保存に失敗しました"
+      );
     } finally {
       setSaving(false);
     }
   };
 
+  if (loading) {
+    return (
+      <main className="min-h-screen bg-[#F5F8FC] flex items-center justify-center">
+        <p className="text-gray-500">
+          設定を読み込んでいます...
+        </p>
+      </main>
+    );
+  }
+
   return (
     <main className="min-h-screen bg-[#F5F8FC] px-4 py-8">
       <div className="max-w-xl mx-auto bg-white rounded-2xl shadow p-8">
+
         <h1 className="text-3xl font-bold text-[#809CCF]">
           🧊 初期設定
         </h1>
@@ -80,7 +154,9 @@ export default function SetupPage() {
           className="mt-2 w-full border rounded-xl p-3"
           placeholder="例：QUL"
           value={nickname}
-          onChange={(e) => setNickname(e.target.value)}
+          onChange={(e) =>
+            setNickname(e.target.value)
+          }
         />
 
         {/* 冷蔵庫容量 */}
@@ -94,7 +170,9 @@ export default function SetupPage() {
           className="mt-2 w-full border rounded-xl p-3"
           placeholder="例：300"
           value={fridgeSize}
-          onChange={(e) => setFridgeSize(e.target.value)}
+          onChange={(e) =>
+            setFridgeSize(e.target.value)
+          }
         />
 
         <p className="mt-1 text-sm text-gray-500">
@@ -112,7 +190,9 @@ export default function SetupPage() {
           className="mt-2 w-full border rounded-xl p-3"
           placeholder="例：3"
           value={familyCount}
-          onChange={(e) => setFamilyCount(e.target.value)}
+          onChange={(e) =>
+            setFamilyCount(e.target.value)
+          }
         />
 
         {/* よく行くスーパー */}
@@ -125,7 +205,9 @@ export default function SetupPage() {
           className="mt-2 w-full border rounded-xl p-3"
           placeholder="例：QUL Store"
           value={store}
-          onChange={(e) => setStore(e.target.value)}
+          onChange={(e) =>
+            setStore(e.target.value)
+          }
         />
 
         {/* 保存 */}
@@ -134,10 +216,12 @@ export default function SetupPage() {
           disabled={saving}
           className="mt-8 w-full bg-[#809CCF] text-white py-3 rounded-xl font-bold disabled:opacity-50"
         >
-          {saving ? "保存中..." : "保存して開始"}
+          {saving
+            ? "保存中..."
+            : "保存して開始"}
         </button>
+
       </div>
     </main>
   );
 }
-```

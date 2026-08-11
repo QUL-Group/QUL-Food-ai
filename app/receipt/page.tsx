@@ -854,55 +854,159 @@ export default function ReceiptPage() {
  * ========================================
  */
 
-function fileToBase64(
+async function fileToBase64(
   file: File
 ): Promise<ImagePayload> {
-  return new Promise(
-    (resolve, reject) => {
-      const reader =
-        new FileReader();
+  // HEIC/HEIFはブラウザでCanvas変換できないことがあるため、
+  // その場合は元画像を送る（サーバー側で対応できる場合に備える）
+  const isHeic =
+    file.type === "image/heic" ||
+    file.type === "image/heif" ||
+    /\.(heic|heif)$/i.test(file.name);
+
+  if (isHeic) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
 
       reader.onload = () => {
-        const result =
-          reader.result as string;
-
-        const commaIndex =
-          result.indexOf(",");
+        const result = reader.result as string;
+        const commaIndex = result.indexOf(",");
 
         if (commaIndex === -1) {
           reject(
-            new Error(
-              "画像データの変換に失敗しました"
-            )
+            new Error("画像データの変換に失敗しました")
           );
-
           return;
         }
 
         resolve({
-          data: result.substring(
-            commaIndex + 1
-          ),
-
-          mimeType:
-            file.type ||
-            getMimeType(
-              file.name
-            ),
+          data: result.substring(commaIndex + 1),
+          mimeType: file.type || getMimeType(file.name),
         });
       };
 
       reader.onerror = () => {
         reject(
-          new Error(
-            "画像の読み込みに失敗しました"
-          )
+          new Error("画像の読み込みに失敗しました")
         );
       };
 
       reader.readAsDataURL(file);
-    }
-  );
+    });
+  }
+
+  // 通常画像はブラウザ側で圧縮してからBase64化する。
+  // これによりVercelの413 FUNCTION_PAYLOAD_TOO_LARGEを防ぎやすくする。
+  return new Promise((resolve, reject) => {
+    const objectUrl = URL.createObjectURL(file);
+    const img = new Image();
+
+    img.onload = () => {
+      try {
+        const MAX_WIDTH = 1400;
+        const MAX_HEIGHT = 2000;
+        const JPEG_QUALITY = 0.72;
+
+        let width = img.naturalWidth;
+        let height = img.naturalHeight;
+
+        const scale = Math.min(
+          1,
+          MAX_WIDTH / width,
+          MAX_HEIGHT / height
+        );
+
+        width = Math.max(1, Math.round(width * scale));
+        height = Math.max(1, Math.round(height * scale));
+
+        const canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext("2d");
+
+        if (!ctx) {
+          URL.revokeObjectURL(objectUrl);
+          reject(
+            new Error("画像処理を開始できませんでした")
+          );
+          return;
+        }
+
+        // 白背景にして、透過PNGなども読みやすいJPEGに変換
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, width, height);
+
+        ctx.drawImage(
+          img,
+          0,
+          0,
+          width,
+          height
+        );
+
+        canvas.toBlob(
+          (blob) => {
+            URL.revokeObjectURL(objectUrl);
+
+            if (!blob) {
+              reject(
+                new Error("画像の圧縮に失敗しました")
+              );
+              return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = () => {
+              const result = reader.result as string;
+              const commaIndex = result.indexOf(",");
+
+              if (commaIndex === -1) {
+                reject(
+                  new Error(
+                    "画像データの変換に失敗しました"
+                  )
+                );
+                return;
+              }
+
+              resolve({
+                data: result.substring(
+                  commaIndex + 1
+                ),
+                mimeType: "image/jpeg",
+              });
+            };
+
+            reader.onerror = () => {
+              reject(
+                new Error(
+                  "圧縮画像の読み込みに失敗しました"
+                )
+              );
+            };
+
+            reader.readAsDataURL(blob);
+          },
+          "image/jpeg",
+          JPEG_QUALITY
+        );
+      } catch (error) {
+        URL.revokeObjectURL(objectUrl);
+        reject(error);
+      }
+    };
+
+    img.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      reject(
+        new Error("画像を読み込めませんでした")
+      );
+    };
+
+    img.src = objectUrl;
+  });
 }
 
 
