@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import BottomNav from "@/components/BottomNav";
+import AdBanner from "@/components/AdBanner";
 import { auth } from "@/lib/firebase";
 import { getFoodItems } from "@/lib/foodService";
 import { getNotifications } from "@/lib/notificationService";
@@ -84,6 +85,8 @@ export default function HomePage(){
             <h2 className="font-bold">🍳 AIおすすめ献立</h2>
             <p className="mt-3 text-gray-500">食材を登録すると提案します</p>
           </section>
+
+          <AdBanner />
         </div>
       </main>
       <BottomNav/>
