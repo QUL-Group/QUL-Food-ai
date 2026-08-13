@@ -379,18 +379,15 @@ export default function ReceiptPage() {
       setMessage(
         "✅ 冷蔵庫に登録しました"
       );
-    } catch (error) {
-      console.error(
-        "Save Receipt Error",
-        error
-      );
+    }catch (error) {
+  console.error("Save Receipt Error", error);
 
-      setMessage(
-        "保存に失敗しました。食材メニューを確認して保存されているか確認してください。"
-      );
-    } finally {
-      setLoading(false);
-    }
+  setMessage(
+    `保存に失敗しました: ${
+      error instanceof Error ? error.message : String(error)
+    }`
+  );
+}
   };
 
   /*
